@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.welcome_title{
+    text-align: center ;
+    font-family:Arial, Helvetica, sans-serif;
+    text-shadow: 1px 1.5px grey;
+    
+}
+.nav_button{
+    padding: 5px 10px;
+    border-radius: 13px;
+    color: white;
+    background-color: grey;
+    margin:3px;
+}
+.nav_button:hover{
+color: black;
+background-color: white;
+box-shadow: 3px 3px 5px 0 grey;
+transition-duration: 150ms;
+
+}
+
+.nav_button:active{
+    color: white;
+    background-color: grey;
+
+}
+.nav{
+    display: flex;
+    justify-content: right;
+
+}
+.collect{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+.collect:hover{
+    
+    text-decoration: underline;
+}
+.products td a img{
+    margin: 150px 30px;
+    width:200px;
+    padding :5px;
+    
+}
+
+</style>
+<body>
+    <ul class="nav">
+        <li type="none"><button class="nav_button">Home</button></li>
+        <li type="none"><button class="nav_button">Sign_up</button></li>
+        <li type="none"><button class="nav_button">Login</button></li>
+        <li type="none"><button class="nav_button">Feedback</button></li>
+        <li type="none"><button class="nav_button">Contact_us</button></li>
+    </ul>
+    <hr>
+    <h1 class="welcome_title">Welcome to Design your Pc</h1>
+    <a href="collect_details.html" class="collect" >  Build your dream PC on your budget and requirements</a>
+    <table class="products">
+        <tr row></tr>
+        <tr>
+            <td>
+                <a href="https://www.nvidia.com/en-in/geforce/graphics-cards
+                /50-series/rtx-5070-family/"><img src="/images/rtx5070.png" alt="rtx5070"></a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
