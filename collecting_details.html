@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Build Your Dream PC</h1>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <h2>Collecting Details</h2>
+            <form action="/collecting_details" method="POST">
+                 <label  for="budget">Budget</label>  
+                 <select id="budget" name="budget" required>
+                    <option value="">Select Your Budget</option>
+                    <option value="20-30k">20-30k</option>
+                    <option value="30-40k">30-40k</option>
+                    <option value="40-50k">40-50k</option>
+                    <option value="50-60k">50-60k</option>
+                    <option value="60-70k">60-70k</option>
+                    <option value="70-80k">70-80k</option>
+                    <option value="80-90k">80-90k</option>
+                    <option value="90-100k">90-100k</option>
+                 </select>
+                 <label for ="usage">Usage</label>
+                 <select id="usage" name="usage" required>
+                    <option value="">Select Usage</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Work">Work</option>
+                    <option value="Editing">Editing</option>
+                    <option value="">Normal Use</option>
+                 </select>
+                 <label for="brand">Preferred Brand</label>
+                 <select id="brand" name="brand" >
+                    <option value="">Select Your Preferred Brand</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Dell">Dell</option>
+                    <option value="HP">HP</option>
+                    <option value="Asus">Asus</option>
+                 </select>
+                 <button type="submit" class="btn">Submit</button>
+            </form>
+</body>
