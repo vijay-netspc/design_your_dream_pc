@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comprehensive blog explaining HTML tags and their usage.">
+    <title>Understanding HTML Tags</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+        }
+        header h1{
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-left: 3px solid #333;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin: 20px 0;
+        }
+	.output{
+	display:inline-block;
+    height: 200px;
+    width: 600px;
+	border-style: solid;
+	border-color:black;
+    margin-right: 40px;
+    margin-left: 30px;
+	}
+    .output-label{
+        display: inline-block;
+        margin-left: 250px;
+        margin-right: 340px;
+    }
+    .output-container{
+        border-style: solid;
+        border-color: black;
+        padding: 30px;
+        
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Details and Summary tags</h1>
+    </header>
+
+    <article>
+        <section>
+            <h2>HTML <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> Tags</h2>
+            <p>The <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> tags are interactive HTML elements used to create collapsible content. They are commonly used to hide details that can be revealed on demand, enhancing user experience and saving space on the webpage.</p>
+
+            <h3>1. The <code>&lt;details&gt;</code> Tag</h3>
+            <p>The <code>&lt;details&gt;</code> tag acts as a container for the content that can be expanded or collapsed. By default, the content inside <code>&lt;details&gt;</code> is hidden unless the user expands it.</p>
+
+            <h3>2. The <code>&lt;summary&gt;</code> Tag</h3>
+            <p>The <code>&lt;summary&gt;</code> tag defines a visible heading for the <code>&lt;details&gt;</code> element. When clicked, it toggles the visibility of the content within the <code>&lt;details&gt;</code>.</p>
+
+            <h3>Example Usage</h3>
+            <pre>
+&lt;details&gt;
+  &lt;summary&gt;Click to see more details&lt;/summary&gt;
+  &lt;p&gt;This is the hidden content that appears when the summary is clicked.&lt;/p&gt;
+&lt;/details&gt;
+            </pre>
+            <div class="output-container">
+
+		<img class="output" src="./img_1.png" alt="Example Png">
+        
+		<img class="output" src="./img_2.png" alt="Example Png">
+        <br>
+        <label class="output-label" for="output">Before  toggle</label>
+        <label class="output-label" for="output">After  toggle</label>
+    </div>
+            <h3>Browser Support</h3>
+            <p>Most modern browsers support the <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> tags, including Chrome, Edge, Firefox, and Safari. For older browsers, fallback mechanisms may be required.</p>
+
+            <h3>Advantages</h3>
+            <ul>
+                <li>Improves user experience by hiding non-essential information until needed.</li>
+                <li>Reduces visual clutter on the page.</li>
+                <li>Native support for accessibility and keyboard navigation.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>The <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> tags are powerful tools for creating interactive, collapsible sections on a webpage. They are easy to implement and enhance both the functionality and design of your website. Start experimenting with them to see how they can improve your web projects!</p>
+        </section>
+    </article>
+
+    <footer>
+        <p>&copy; 2025 Learn HTML Blog</p>
+    </footer>
+</body>
+</html>
