@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById("budget").textContent = params.get("budget") || "Not selected";
+            document.getElementById("usage").textContent = params.get("usage") || "Not selected";
+            document.getElementById("brand").textContent = params.get("brand") || "Not selected";
+        };
+    </script>
+</head>
+
+
+<body>
+    <header class="header">
+        <h1>Success</h1>
+    </header>
+    <div class="container">
+        <h2>Your Selected PC Build Details</h2>
+        <p><strong>Budget:</strong> <span id="budget"></span></p>
+        <p><strong>Usage:</strong> <span id="usage"></span></p>
+        <p><strong>Preferred Brand:</strong> <span id="brand"></span></p>
+        <a href="collecting_details.html" class="btn">Go Back</a>
+    </div>
+</body>
+</html>
