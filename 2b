@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Build Your Dream PC</h1>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <h2>Sign-Up</h2>
+            <form action="/signup" method="POST">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter a secure password" required>
+                
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+                
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" required> Male</label>
+                    <label><input type="radio" name="gender" value="female" required> Female</label>
+                    <label><input type="radio" name="gender" value="other" required> Other</label>
+                </div>
+                
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="">--Select Your Country--</option>
+                    <option value="us">United States</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="india">India</option>
+                    <option value="australia">Australia</option>
+                    <option value="other">Other</option>
+                </select>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">terms and conditions</a></label>
+                </div>
+                
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    // Function to validate form fields
+    function validateForm(showAlert = false) {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const dob = document.getElementById("dob").value;
+        const termsChecked = document.getElementById("terms").checked;
+
+        if (!name || !email || !password || !dob || !termsChecked) {
+            if (showAlert) {
+                alert("Please fill all the fields and accept the terms.");
+            }
+            return false;
+        }
+        return true;
+    }
+
+    // Using `.bind()` to ensure `handleSubmit` runs in the correct context
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (validateForm.call(this, true)) { // Call validation with alert on submit
+            alert("Form submitted successfully!");
+            this.submit(); // Only submit if validation passes
+        }
+    }
+    form.addEventListener("submit", handleSubmit.bind(form));
+
+    // Using `.call()` to validate but without alerts
+    document.getElementById("email").addEventListener("blur", function () {
+        validateForm.call(form, false); // Runs validation silently
+    });
+
+    // Using `.apply()` to trigger validation on multiple fields
+    document.querySelectorAll("input, select").forEach(function (element) {
+        element.addEventListener("change", function () {
+            validateForm.apply(form, [false]); // Passing argument as an array for `apply`
+        });
+    });
+});
+
+</script>
+</html>
