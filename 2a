@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream PC Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: lightgray;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        h2 {
+            color: darkred;
+        }
+        button {
+            background-color: darkred;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: maroon;
+        }
+        .section {
+            width: 300px;
+            background-color: white;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input, select {
+            padding: 8px;
+            width: 80%;
+            margin: 10px;
+            border: 2px solid gray;
+            border-radius: 5px;
+        }
+        input:focus, select:focus {
+            border-color: darkred;
+            outline: none;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+        #scrollMessage {
+            display: none;
+            font-size: 14px;
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Dream PC Builder</h2>
+    <button id="darkModeBtn">Toggle Dark Mode</button>
+    <div class="section">
+        <h3>Select Your Components</h3>
+        <select id="cpuSelect">
+            <option value="">Choose CPU</option>
+            <option value="Intel i9">Intel i9</option>
+            <option value="AMD Ryzen 9">AMD Ryzen 9</option>
+        </select>
+        <select id="gpuSelect">
+            <option value="">Choose GPU</option>
+            <option value="NVIDIA RTX 4090">NVIDIA RTX 4090</option>
+            <option value="AMD RX 7900 XTX">AMD RX 7900 XTX</option>
+        </select>
+        <select id="ramSelect">
+            <option value="">Choose RAM</option>
+            <option value="32GB DDR5">32GB DDR5</option>
+            <option value="64GB DDR5">64GB DDR5</option>
+        </select>
+        <p><strong>Selected Components:</strong></p>
+        <p id="componentPreview">None</p>
+    </div>
+
+    <form id="pcForm" class="section">
+        <h3>Confirm Your Build</h3>
+        <input type="text" id="userName" placeholder="Enter your name">
+        <button type="submit">Confirm Build</button>
+        <button type="button" id="resetBtn">Reset Selection</button>
+    </form>
+
+    <p id="scrollMessage">💡 Remember: Choose high-quality components for the best performance!</p>
+
+    <script>
+        // 1. Dark Mode Toggle
+        document.getElementById("darkModeBtn").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+        });
+
+        // 2. Live Component Preview
+        document.querySelectorAll("select").forEach(select => {
+            select.addEventListener("change", function() {
+                let cpu = document.getElementById("cpuSelect").value || "No CPU";
+                let gpu = document.getElementById("gpuSelect").value || "No GPU";
+                let ram = document.getElementById("ramSelect").value || "No RAM";
+                document.getElementById("componentPreview").textContent = `CPU: ${cpu}, GPU: ${gpu}, RAM: ${ram}`;
+            });
+        });
+
+        // 3. Form Submission - Validate Name Input
+        document.getElementById("pcForm").addEventListener("submit", function(event) {
+            let userName = document.getElementById("userName").value.trim();
+            if (userName === "") {
+                alert("Please enter your name before confirming your build.");
+                event.preventDefault();
+            } else {
+                alert(`Thank you, ${userName}! Your Dream PC is confirmed.`);
+            }
+        });
+
+        // 4. Reset Button - Clears Selection
+        document.getElementById("resetBtn").addEventListener("click", function() {
+            document.querySelectorAll("select").forEach(select => select.value = "");
+            document.getElementById("componentPreview").textContent = "None";
+        });
+
+        // 5. Scroll Event - Show Reminder Message
+        window.addEventListener("scroll", function() {
+            document.getElementById("scrollMessage").style.display = "block";
+        });
+
+        // 6. Window Load - Welcome Message
+        window.addEventListener("load", function() {
+            alert("Welcome to the Dream PC Builder!");
+        });
+    </script>
+
+</body>
+</html>
