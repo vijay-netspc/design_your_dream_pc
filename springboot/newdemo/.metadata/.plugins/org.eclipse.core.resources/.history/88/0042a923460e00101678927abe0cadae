@@ -1,0 +1,41 @@
+package com.pcbuild.controller;
+
+import com.pcbuild.model.PCBuild;
+import com.pcbuild.service.PCBuildService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/pcbuilds")
+public class PCBuildApiController {
+    @Autowired
+    private PCBuildService service;
+
+    @PostMapping
+    public PCBuild addBuild(@RequestBody PCBuild build) {
+        return service.addBuild(build);
+    }
+
+    @GetMapping
+    public List<PCBuild> getAllBuilds() {
+        return service.getAllBuilds();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<PCBuild> getBuildById(@PathVariable Long id) {
+        return service.getBuildById(id);
+    }
+
+    @PutMapping("/{id}")
+    public PCBuild updateBuild(@PathVariable Long id, @RequestBody PCBuild updatedBuild) {
+        return service.updateBuild(id, updatedBuild);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteBuild(@PathVariable Long id) {
+        return service.deleteBuild(id) ? "Build deleted successfully" : "Build ID not found";
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PC Builder</title>
+</head>
+<body>
+    <h1>PC Builder - Add Components</h1>
+
+    <form th:action="@{/pcbuilds/add}" method="post" th:object="${pcBuild}">
+        <input type="hidden" th:field="*{id}"/>
+        <label>Name:</label> <input type="text" th:field="*{name}" required/><br/>
+        <label>Processor:</label> <input type="text" th:field="*{processor}" required/><br/>
+        <label>Graphics Card:</label> <input type="text" th:field="*{graphicsCard}" required/><br/>
+        <label>Memory:</label> <input type="text" th:field="*{memory}" required/><br/>
+        <label>Storage:</label> <input type="text" th:field="*{storage}" required/><br/>
+        <label>Power Supply:</label> <input type="text" th:field="*{powerSupply}" required/><br/>
+        <button type="submit">Add Build</button>
+    </form>
+
+    <h2>Existing Builds</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Processor</th>
+            <th>Graphics Card</th>
+            <th>Memory</th>
+            <th>Storage</th>
+            <th>Power Supply</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="build : ${pcBuilds}">
+            <td th:text="${build.name}"></td>
+            <td th:text="${build.processor}"></td>
+            <td th:text="${build.graphicsCard}"></td>
+            <td th:text="${build.memory}"></td>
+            <td th:text="${build.storage}"></td>
+            <td th:text="${build.powerSupply}"></td>
+            <td>
+                <a th:href="@{/pcbuilds/edit/{id}(id=${build.id})}">Edit</a>
+                <a th:href="@{/pcbuilds/delete/{id}(id=${build.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,34 @@
+package com.pcbuild.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "builds")
+public class PCBuild {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
+    private String processor;
+    
+    @Column(nullable = false)
+    private String graphicsCard;
+    
+    @Column(nullable = false)
+    private String memory;
+    
+    @Column(nullable = false)
+    private String storage;
+    
+    @Column(nullable = false)
+    private String powerSupply;
+}

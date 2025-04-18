@@ -1,0 +1,38 @@
+package com.pcbuild.controller;
+
+import com.pcbuild.model.PCBuild;
+import com.pcbuild.service.PCBuildService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/pcbuilds")
+public class PCBuildController {
+
+    @Autowired
+    private PCBuildService service;
+
+    // Mapping for home page
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("pcBuild", new PCBuild()); // Empty object for form
+        model.addAttribute("pcBuilds", service.getAllBuilds()); // Fetch all builds
+        return "index"; // Returns the 'index.html' template
+    }
+
+    // Add PC Build (POST request from the form)
+    @PostMapping("/add")
+    public String addBuild(@ModelAttribute PCBuild build) {
+        service.addBuild(build);
+        return "redirect:/pcbuilds/"; // Redirect back to home page
+    }
+
+    // Delete a PC Build (on delete link click)
+    @GetMapping("/delete/{id}")
+    public String deleteBuild(@PathVariable Long id) {
+        service.deleteBuild(id);
+        return "redirect:/pcbuilds/"; // Redirect back to home page
+    }
+}

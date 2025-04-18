@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Builder</title>
+    <script>
+        // Function to fetch all builds and display them
+        function getAllBuilds() {
+    fetch('/api/pcbuilds')
+        .then(response => response.json())
+        .then(data => {
+            let buildList = document.getElementById("buildList");
+            buildList.innerHTML = "";
+
+            data.forEach(build => {
+                let li = document.createElement("li");
+                li.textContent = `${build.name} - ${build.processor}`;
+
+                // Create a container for buttons
+                let buttonContainer = document.createElement("div");
+                buttonContainer.classList.add("button-container");
+
+                // Delete Button
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = () => deleteBuild(build.id);
+
+                // Update Button
+                let updateButton = document.createElement("button");
+                updateButton.textContent = "Update";
+                updateButton.onclick = () => populateForm(build);
+
+                // Append buttons to container
+                buttonContainer.appendChild(updateButton);
+                buttonContainer.appendChild(deleteButton);
+
+                // Append button container to li
+                li.appendChild(buttonContainer);
+                buildList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching builds:', error));
+}
+
+function populateForm(build) {
+    document.getElementById("name").value = build.name;
+    document.getElementById("processor").value = build.processor;
+    document.getElementById("graphicsCard").value = build.graphicsCard;
+    document.getElementById("memory").value = build.memory;
+    document.getElementById("storage").value = build.storage;
+    document.getElementById("powerSupply").value = build.powerSupply;
+    
+    // Change button text to "Update Build"
+    let submitButton = document.getElementById("submitButton");
+    submitButton.textContent = "Update Build";
+
+    // Change form submission behavior
+    let form = document.getElementById("addBuildForm");
+
+    // Remove existing submit event listeners (important to prevent multiple calls)
+    form.onsubmit = function (event) {
+        event.preventDefault();  // Prevent default form submission
+        updateBuild(build.id);   // Call update function with build ID
+    };
+}
+function updateBuild(id) {
+    const updatedBuild = {
+        name: document.getElementById("name").value,
+        processor: document.getElementById("processor").value,
+        graphicsCard: document.getElementById("graphicsCard").value,
+        memory: document.getElementById("memory").value,
+        storage: document.getElementById("storage").value,
+        powerSupply: document.getElementById("powerSupply").value
+    };
+
+    fetch(`/api/pcbuilds/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedBuild)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Build updated successfully!");
+        
+        // Reset form and button text
+        document.getElementById("addBuildForm").reset();
+        let submitButton = document.getElementById("submitButton");
+        submitButton.textContent = "Add Build";
+
+        // Restore default form behavior for adding builds
+        let form = document.getElementById("addBuildForm");
+        form.onsubmit = function (event) {
+            event.preventDefault();
+            addBuild();
+        };
+
+        getAllBuilds();  // Refresh the build list
+    })
+    .catch(error => console.error('Error updating build:', error));
+}
+
+        // Function to add a new build
+        function addBuild() {
+            const name = document.getElementById("name").value;
+            const processor = document.getElementById("processor").value;
+            const graphicsCard = document.getElementById("graphicsCard").value;
+            const memory = document.getElementById("memory").value;
+            const storage = document.getElementById("storage").value;
+            const powerSupply = document.getElementById("powerSupply").value;
+
+            const newBuild = {
+                name: name,
+                processor: processor,
+                graphicsCard: graphicsCard,
+                memory: memory,
+                storage: storage,
+                powerSupply: powerSupply
+            };
+
+            fetch('/api/pcbuilds', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newBuild)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Build added!');
+                getAllBuilds();  // Refresh the list of builds
+            })
+            .catch(error => console.error('Error adding build:', error));
+        }
+
+        // Function to delete a build
+        function deleteBuild(id) {
+            fetch(`/api/pcbuilds/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                getAllBuilds();  // Refresh the list of builds
+            })
+            .catch(error => console.error('Error deleting build:', error));
+        }
+
+        // Call getAllBuilds() when the page loads
+        window.onload = getAllBuilds;
+    </script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 8px;
+        width: 50%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-size: 14px;
+        color: #555;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+	
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    ul#buildList {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul#buildList li {
+        background-color: #fff;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+	
+    }
+
+    button {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+margin-left: auto;
+    display: block;
+    }
+
+    button:hover {
+        background-color: #e53935;
+    }
+
+    @media screen and (max-width: 600px) {
+        form {
+            width: 90%;
+        }
+    }
+.button-container {
+    display: flex;
+    gap: 10px;  /* Ensures spacing between buttons */
+    margin-left: auto; /* Pushes buttons to the right */
+}
+
+</style>
+
+<body>
+
+    <h1>PC Builder</h1>
+
+    <!-- Form to add a new build -->
+    <h2>Add New Build</h2>
+    <form id="addBuildForm" onsubmit="event.preventDefault(); addBuild();">
+        <label>Name:</label><br>
+        <input type="text" id="name" required><br><br>
+
+        <label>Processor:</label><br>
+        <input type="text" id="processor" required><br><br>
+
+        <label>Graphics Card:</label><br>
+        <input type="text" id="graphicsCard" required><br><br>
+
+        <label>Memory:</label><br>
+        <input type="text" id="memory" required><br><br>
+
+        <label>Storage:</label><br>
+        <input type="text" id="storage" required><br><br>
+
+        <label>Power Supply:</label><br>
+        <input type="text" id="powerSupply" required><br><br>
+
+        <button id="submitButton" type="submit">Add Build</button>
+
+    </form>
+
+    <h2>All Builds</h2>
+    <ul id="buildList">
+        <!-- List of builds will be populated here -->
+    </ul>
+
+</body>
+</html>

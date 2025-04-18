@@ -1,0 +1,47 @@
+package com.pcbuild.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+public class PCBuild {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String processor;
+    private String graphicsCard;
+    private String memory;
+    private String storage;
+    private String powerSupply;
+
+    // Constructors
+    public PCBuild() {}
+
+    public PCBuild(String name, String processor, String graphicsCard, String memory, String storage, String powerSupply) {
+        this.name = name;
+        this.processor = processor;
+        this.graphicsCard = graphicsCard;
+        this.memory = memory;
+        this.storage = storage;
+        this.powerSupply = powerSupply;
+    }
+
+    // Getters
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getProcessor() { return processor; }
+    public String getGraphicsCard() { return graphicsCard; }
+    public String getMemory() { return memory; }
+    public String getStorage() { return storage; }
+    public String getPowerSupply() { return powerSupply; }
+
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setProcessor(String processor) { this.processor = processor; }
+    public void setGraphicsCard(String graphicsCard) { this.graphicsCard = graphicsCard; }
+    public void setMemory(String memory) { this.memory = memory; }
+    public void setStorage(String storage) { this.storage = storage; }
+    public void setPowerSupply(String powerSupply) { this.powerSupply = powerSupply; }
+}
